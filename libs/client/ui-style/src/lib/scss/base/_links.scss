@@ -1,0 +1,18 @@
+@use 'sass:color';
+
+a {
+  color: $nord7;
+  text-decoration: underline;
+
+  &:hover {
+    color: color.adjust($color: $nord7, $lightness: -10%);
+  }
+
+  &:active {
+    color: $nord9;
+  }
+
+  &:visited {
+    color: $nord10;
+  }
+}

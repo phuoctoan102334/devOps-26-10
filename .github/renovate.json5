@@ -1,0 +1,62 @@
+{
+  $schema: 'https: //docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:base',
+    'docker:enableMajor',
+    ':disableRateLimiting',
+    ':dependencyDashboard',
+    ':semanticCommits',
+    ':enablePreCommit',
+    ':automergeDigest',
+    ':automergeBranch',
+    'helpers:pinGitHubActionDigests',
+    'monorepo:nrwl',
+    'monorepo:nest',
+    'monorepo:angular',
+    'group:fortawesome',
+    'group:monorepos',
+  ],
+  dependencyDashboard: true,
+  dependencyDashboardTitle: 'Renovate Dashboard 🤖',
+  suppressNotifications: ['prIgnoreNotification'],
+  rebaseWhen: 'conflicted',
+  schedule: ['every saturday'],
+  'pre-commit': {
+    enabled: true,
+  },
+  schedule: ['every sunday'],
+  regexManagers: [],
+  "packageRules": [
+    {
+      description: 'Automatically merge minor and patch-level updates',
+      matchUpdateTypes: ['minor', 'patch', 'digest'],
+      automerge: true,
+      automergeType: 'branch',
+    }
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true
+    },
+     {
+      "matchConfidence": ["high", "very high"],
+      "groupName": "high merge confidence"
+    },
+    {
+      "matchPackagePatterns": ["^@nx"],
+      "groupName": "Nx Monorepo"
+    },
+    {
+      "matchPackagePatterns": ["^@angular"],
+      "groupName": "Angular Framework"
+    }
+    {
+      "matchPackagePatterns": ["^@nestjs"],
+      "groupName": "NestJS Framework"
+    },
+    {
+      "matchPackagePatterns": ["^@ngrx"],
+      "groupName": "NgRx Framework"
+    }
+  ]
+}
