@@ -85,3 +85,7 @@ Khởi chạy server
 
 "# devOps-26-10"
 "# devOps-26-10" 
+
+
+## ảnh cài ubuntu
+![alt text](image.png)
