@@ -24,6 +24,12 @@ services:
     environment:
       - ENVIRONMENT=docker
       - DATABASE_HOST=postgres # this has to match the name of the database service being used!
+      - DATABASE_PATH=${DATABASE_PATH:-fst.sqlite}
+      - JWT_SECRET=${JWT_SECRET:-something-something-darkside}
+    volumes:
+      # server only reads env from a .env file (ConfigModule ignoreEnvVars: true),
+      # so mount the host .env into its working dir /usr/src/app
+      - ./.env:/usr/src/app/.env:ro
     healthcheck:
       test: wget localhost:3333/api/health -q -O - > /dev/null 2>&1
       interval: 10s
@@ -64,7 +70,7 @@ services:
     volumes:
       - ./tmp/pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', "su -c 'pg_isready -U postgres' postgres"]
+      test: ['CMD-SHELL', "su -c 'pg_isready -U server' postgres"]
       interval: 30s
       timeout: 5s
       retries: 3

@@ -89,3 +89,6 @@ Khởi chạy server
 
 ## ảnh cài ubuntu
 ![alt text](image.png)
+
+# đã update docker-compose và chạy đc docker compose up
+![alt text](image-1.png)
